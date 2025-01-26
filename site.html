@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="program.js" defer></script>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            const username = document.getElementById('username').value;
+
+            // Fazendo a requisição POST
+            fetch('/add-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Define o tipo de conteúdo
+                },
+                body: JSON.stringify({ username }) // Converte o objeto para JSON
+            })
+            .then(response => response.json()) // Converte a resposta para JSON
+            .then(data => {
+                console.log("Resposta do servidor:", data);
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+            });
+        });
+    });
+</script>
+
+<body>
+    <div>
+        <img src="https://siga.cps.sp.gov.br/aluno/Resources/logosiga.png" alt="">
+    
+    <div class="login-container">
+        <form action="/add-user" method="post">
+
+            <div class="nomes">
+                <label for="username" class="tn">Usuário</label>
+                <input type="text" id="username" name="username" required>
+                
+            </div>
+            <div class="nomes">
+                <label for="password" class="tn">Senha</label>
+                <input type="password" id="password"  name="password" required>
+            </div>
+            <div class="div-botao">
+                <button type="submit">Confirmar</button>
+            </div>
+        </form>
+        <div class="div-botao">
+
+            <a href="" class="">Solução para problemas no Acesso
+            </a>
+        </div>
+            
+    
+    </div>   
+    </div>
+</body>
+</html>
